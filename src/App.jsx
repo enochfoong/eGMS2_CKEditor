@@ -57,6 +57,7 @@ import {
   TrackChangesData,
   TrackChangesPreview,
 } from "ckeditor5-premium-features";
+import { WProofreader } from "@webspellchecker/wproofreader-ckeditor5";
 
 import "ckeditor5/ckeditor5.css";
 import "ckeditor5-premium-features/ckeditor5-premium-features.css";
@@ -64,10 +65,12 @@ import "ckeditor5-premium-features/ckeditor5-premium-features.css";
 import "./App.css";
 
 const LICENSE_KEY =
-  "eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3NDQxNTY3OTksImp0aSI6IjYyNGRkNGEyLWZlZjItNGNiNy1hODljLTA3ODkyNDEwNjUyZCIsInVzYWdlRW5kcG9pbnQiOiJodHRwczovL3Byb3h5LWV2ZW50LmNrZWRpdG9yLmNvbSIsImRpc3RyaWJ1dGlvbkNoYW5uZWwiOlsiY2xvdWQiLCJkcnVwYWwiLCJzaCJdLCJ3aGl0ZUxhYmVsIjp0cnVlLCJsaWNlbnNlVHlwZSI6InRyaWFsIiwiZmVhdHVyZXMiOlsiKiJdLCJ2YyI6ImFkZTFlN2U2In0.qznq7M1yo-_DgH9-NGKCfQ3NxklUI6av4_Kh5qcSKyNpjAuysGT72wi0D2Txx7XrN9Zstq0a7aZjKB36xF-ubQ";
+  "eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3NDU2MjU1OTksImp0aSI6ImI0OWViMmQ4LWU0YzQtNGNjOS1hM2VhLTM3OWVjZWNiNzk2YiIsInVzYWdlRW5kcG9pbnQiOiJodHRwczovL3Byb3h5LWV2ZW50LmNrZWRpdG9yLmNvbSIsImRpc3RyaWJ1dGlvbkNoYW5uZWwiOlsiY2xvdWQiLCJkcnVwYWwiLCJzaCJdLCJ3aGl0ZUxhYmVsIjp0cnVlLCJsaWNlbnNlVHlwZSI6InRyaWFsIiwiZmVhdHVyZXMiOlsiKiJdLCJ2YyI6IjI1NmRiZTczIn0._4hKUmlZyk6hUBARrs02kQ6rjOd9652vq4xveWEHtfO7rMBsVaEPf6-e16KzDfwuAbg9RGz5VVUZq_a2tAM69g";
 
 const CLOUD_SERVICES_TOKEN_URL =
   "https://2opr35e9brw_.cke-cs.com/token/dev/68b6353493c9c30c0f59db7777d3c28a1811c2d3154623cb0b73ccf2d8dc?limit=10";
+
+const WPROOFREADER_SERVICE_ID = "Q4kOl8SAtHPKOHe";
 
 // Revisions data will be available under a global variable `revisions`.
 const revisions = [
@@ -97,9 +100,9 @@ const revisions = [
     diffData: {
       main: {
         insertions:
-          '[{"name":"figure","attributes":[["class","image"]],"children":[{"name":"img","attributes":[["src","https://ckeditor.com/docs/ckeditor5/latest/assets/img/revision-history-demo.png"]],"children":[]}]},{"name":"h1","attributes":[],"children":["PUBLISHING AGREEMENT"]},{"name":"h3","attributes":[],"children":["Introduction"]},{"name":"p","attributes":[],"children":["This publishing contract, the “contract”, is entered into as of 1st June 2020 by and between The Lower Shelf, the “Publisher”, and John Smith, the “Author”."]},{"name":"h3","attributes":[],"children":["Grant of Rights"]},{"name":"p","attributes":[],"children":["The Author grants the Publisher full right and title to the following, in perpetuity:"]},{"name":"ul","attributes":[],"children":[{"name":"li","attributes":[],"children":["To publish, sell, and profit from the listed works in all languages and formats in existence today and at any point in the future."]},{"name":"li","attributes":[],"children":["To create or devise modified, abridged, or derivative works based on the works listed."]},{"name":"li","attributes":[],"children":["To allow others to use the listed works at their discretion, without providing additional compensation to the Author."]}]},{"name":"p","attributes":[],"children":["These rights are granted by the Author on behalf of him and their successors, heirs, executors, and any other party who may attempt to lay claim to these rights at any point now or in the future."]},{"name":"p","attributes":[],"children":["Any rights not granted to the Publisher above remain with the Author."]},{"name":"p","attributes":[],"children":["The rights granted to the Publisher by the Author shall not be constrained by geographic territories and are considered global in nature."]}]',
+          '[{"type":"c","name":"p","attributes":[],"children":["Mask-wearing intention after the removal of the mandatory mask-wearing requirement in Hong Kong: application of the protection motivation theory and the theory of planned behaviour"]},{"type":"c","name":"p","attributes":[],"children":["Introduction"]},{"type":"c","name":"p","attributes":[],"children":["The coronavirus disease 2019 (COVID-19) pandemic has had extensive global social and health impacts. It triggered an international health and economic crisis that has profoundly altered people’s lives, perceptions, and behaviours. As of 13 March 2025, about 778 million confirmed cases of COVID-19 had caused around 7.1 million deaths worldwide.",{"type":"a","name":"a","attributes":[["target","_blank"],["rel","noopener noreferrer"],["href","https://www.hkmj.org/earlyrelease/hkmj2311274.htm#r1"]],"children":[{"type":"a","name":"sup","attributes":[],"children":["1"]}]}," Various levels of non-pharmaceutical interventions, including frequent handwashing, mask-wearing, and social distancing, were implemented in most countries."]},{"type":"c","name":"p","attributes":[],"children":[]},{"type":"c","name":"p","attributes":[],"children":["Results"]},{"type":"c","name":"p","attributes":[],"children":["Participant characteristics"]},{"type":"c","name":"p","attributes":[],"children":["In total, 483 valid responses were included in the data analysis. ",{"type":"a","name":"a","attributes":[["target","_blank"],["rel","noopener noreferrer"],["href","https://www.hkmj.org/system/files/hkmj2311274-table-1.jpg"]],"children":["Table 1"]}," presents the participants’ demographic characteristics. The largest proportion of respondents belonged to the 18-25 age-group (28.2%), followed by the 56-65 (18.4%), the 66-75 (13.7%), and the 36-45 (13.0%) age-groups."]},{"type":"c","name":"figure","attributes":[["class","image"],["data-suggestion-end-after","insertion:eb9dc17cf61bc0f9c26c3c9cb2b91c399:user-1"],["data-suggestion-start-before","insertion:eb9dc17cf61bc0f9c26c3c9cb2b91c399:user-1"],["data-revision-end-after","insertion:user-1:0"],["data-revision-start-before","insertion:user-1:0"]],"children":[{"type":"e","name":"img","attributes":[["src","https://www.hkmj.org/system/files/hkmj2311274-table-3.jpg"]],"children":[]}]},{"type":"c","name":"p","attributes":[],"children":["Structural model"]},{"type":"c","name":"p","attributes":[],"children":[{"type":"a","name":"a","attributes":[["target","_blank"],["rel","noopener noreferrer"],["href","https://www.hkmj.org/system/files/hkmj2311274-table-4.jpg"]],"children":["Table 4"]}," displays the results of direct effects in the structural model. Of the 17 hypotheses, 10 were supported based on the results generated through a bootstrapping procedure with 5000 resamples. Four constructs—perceived severity, perceived self-efficacy, subjective norms, and attitude—had significant positive effects on the intention to continue wearing a mask. In contrast, perceived reward of maladaptive behaviours had a significant negative effect on mask-wearing intention.",{"type":"u","name":"revision-start","attributes":[["name","insertion:user-1:1"]],"children":[]},{"type":"u","name":"suggestion-start","attributes":[["name","insertion:e1e7f6670f5509471f55168bfc0fdcc55:user-1"]],"children":[]}]},{"type":"c","name":"figure","attributes":[["class","image"]],"children":[{"type":"e","name":"img","attributes":[["src","https://www.hkmj.org/system/files/hkmj2311274-fig.jpg"]],"children":[]}]},{"type":"c","name":"p","attributes":[],"children":["References"]},{"type":"c","name":"p","attributes":[],"children":["1. World Health Organization. WHO COVID-19 Dashboard. Available from: ",{"type":"a","name":"a","attributes":[["target","_blank"],["rel","noopener noreferrer"],["href","https://covid19.who.int/"]],"children":["https://covid19.who.int/"]},". Accessed 13 Mar 2025."]},{"type":"c","name":"p","attributes":[],"children":["2. Lison A, Banholzer N, Sharma M, et al. Effectiveness assessment of non-pharmaceutical interventions: lessons learned from the COVID-19 pandemic. Lancet Public Health 2023;8:e311-7. ",{"type":"a","name":"a","attributes":[["target","_blank"],["rel","noopener noreferrer"],["href","https://doi.org/10.1016/S2468-2667(23)00046-4"]],"children":["Crossref"]}]},{"type":"c","name":"p","attributes":[["data-revision-end-after","insertion:user-1:1"]],"children":["3. Duan Y, Shang B, Liang W, et al. Predicting hand washing, mask wearing and social distancing behaviors among older adults during the COVID-19 pandemic: an integrated social cognition model. BMC Geriatr 2022;22:91. ",{"type":"a","name":"a","attributes":[["target","_blank"],["rel","noopener noreferrer"],["href","https://doi.org/10.1186/s12877-022-02785-2"]],"children":["Crossref"]},{"type":"u","name":"suggestion-end","attributes":[["name","insertion:e1e7f6670f5509471f55168bfc0fdcc55:user-1"]],"children":[]}]}]',
         deletions:
-          '[{"name":"h1","attributes":[],"children":["PUBLISHING AGREEMENT"]},{"name":"h3","attributes":[],"children":["Introduction"]},{"name":"p","attributes":[],"children":["This publishing contract, the “contract”, is entered into as of 1st June 2020 by and between The Lower Shelf, the “Publisher”, and John Smith, the “Author”."]},{"name":"h3","attributes":[],"children":["Grant of Rights"]},{"name":"p","attributes":[],"children":["The Author grants the Publisher full right and title to the following, in perpetuity:"]},{"name":"ul","attributes":[],"children":[{"name":"li","attributes":[],"children":["To publish, sell, and profit from the listed works in all languages and formats in existence today and at any point in the future."]},{"name":"li","attributes":[],"children":["To create or devise modified, abridged, or derivative works based on the works listed."]},{"name":"li","attributes":[],"children":["To allow others to use the listed works at their discretion, without providing additional compensation to the Author."]}]},{"name":"p","attributes":[],"children":["These rights are granted by the Author on behalf of him and their successors, heirs, executors, and any other party who may attempt to lay claim to these rights at any point now or in the future."]},{"name":"p","attributes":[],"children":["Any rights not granted to the Publisher above remain with the Author."]},{"name":"p","attributes":[],"children":["The rights granted to the Publisher by the Author shall not be constrained by geographic territories and are considered global in nature."]}]',
+          '[{"type":"c","name":"p","attributes":[],"children":["Mask-wearing intention after the removal of the mandatory mask-wearing requirement in Hong Kong: application of the protection motivation theory and the theory of planned behaviour"]},{"type":"c","name":"p","attributes":[],"children":["Introduction"]},{"type":"c","name":"p","attributes":[],"children":["The coronavirus disease 2019 (COVID-19) pandemic has had extensive global social and health impacts. It triggered an international health and economic crisis that has profoundly altered people’s lives, perceptions, and behaviours. As of 13 March 2025, about 778 million confirmed cases of COVID-19 had caused around 7.1 million deaths worldwide.",{"type":"a","name":"a","attributes":[["target","_blank"],["rel","noopener noreferrer"],["href","https://www.hkmj.org/earlyrelease/hkmj2311274.htm#r1"]],"children":[{"type":"a","name":"sup","attributes":[],"children":["1"]}]}," Various levels of non-pharmaceutical interventions, including frequent handwashing, mask-wearing, and social distancing, were implemented in most countries."]},{"type":"c","name":"p","attributes":[],"children":[]},{"type":"c","name":"p","attributes":[],"children":["Results"]},{"type":"c","name":"p","attributes":[],"children":["Participant characteristics"]},{"type":"c","name":"p","attributes":[],"children":["In total, 483 valid responses were included in the data analysis. ",{"type":"a","name":"a","attributes":[["target","_blank"],["rel","noopener noreferrer"],["href","https://www.hkmj.org/system/files/hkmj2311274-table-1.jpg"]],"children":["Table 1"]}," presents the participants’ demographic characteristics. The largest proportion of respondents belonged to the 18-25 age-group (28.2%), followed by the 56-65 (18.4%), the 66-75 (13.7%), and the 36-45 (13.0%) age-groups."]},{"type":"c","name":"p","attributes":[["data-revision-end-after","deletion:user-1:0"],["data-revision-start-before","deletion:user-1:0"]],"children":[]},{"type":"c","name":"p","attributes":[],"children":["Structural model"]},{"type":"c","name":"p","attributes":[],"children":[{"type":"a","name":"a","attributes":[["target","_blank"],["rel","noopener noreferrer"],["href","https://www.hkmj.org/system/files/hkmj2311274-table-4.jpg"]],"children":["Table 4"]}," displays the results of direct effects in the structural model. Of the 17 hypotheses, 10 were supported based on the results generated through a bootstrapping procedure with 5000 resamples. Four constructs—perceived severity, perceived self-efficacy, subjective norms, and attitude—had significant positive effects on the intention to continue wearing a mask. In contrast, perceived reward of maladaptive behaviours had a significant negative effect on mask-wearing intention.",{"type":"u","name":"revision-start","attributes":[["name","deletion:user-1:1"]],"children":[]}]},{"type":"c","name":"p","attributes":[["data-revision-end-after","deletion:user-1:1"]],"children":[]}]',
       },
     },
     createdAt: "2024-05-27T13:26:39.252Z",
@@ -125,7 +128,7 @@ const revisions = [
     },
     createdAt: "2025-04-07T04:28:50.337Z",
     attributes: {},
-    fromVersion: 49,
+    fromVersion: 2,
     toVersion: 54,
   },
   {
@@ -459,6 +462,8 @@ export default function App() {
             "ImportWord",
             "exportWord",
             "exportPdf",
+            "|",
+            "wproofreader",
           ],
           shouldNotGroupWhenFull: false,
         },
@@ -510,6 +515,7 @@ export default function App() {
           Subscript,
           Superscript,
           SpecialCharactersGreek,
+          WProofreader,
         ],
         extraPlugins: [
           UsersIntegration,
@@ -673,6 +679,13 @@ export default function App() {
           headers: {
             // Include any necessary headers here
           },
+        },
+        wproofreader: {
+          serviceId: WPROOFREADER_SERVICE_ID,
+          srcUrl:
+            "https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js",
+          lang: "en_GB",
+          autoStartup: true,
         },
       },
     };

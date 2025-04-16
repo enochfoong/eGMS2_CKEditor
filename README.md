@@ -1,7 +1,3 @@
-# CKEditor 5 Sample Project
-
-## Setup instructions
-
 ### 1. Install dependencies
 
 To get started, install the necessary npm packages:
@@ -12,7 +8,10 @@ npm install
 
 ### 2. Fill the required information
 
-Make sure to fill in the required information, as the editor requires a license to start. If you don't have an account, you can [create a free account](https://portal.ckeditor.com/checkout?plan=free) to access all premium features for a 14-day trial.
+Update the license keys for CKEditor 5 and WebSpellChecker in the App.jsx file:
+
+CKEditor 5: Replace the value of the LICENSE_KEY variable with your license key.
+WebSpellChecker: Replace the value of the WPROOFREADER_SERVICE_ID variable with your service ID.
 
 ### 3. Start the project
 
@@ -24,6 +23,16 @@ npm run start
 
 And open the project in the browser.
 
----
+### 4. Start file upload server
 
-For more information, please refer to the official [CKEditor 5 documentation](https://ckeditor.com/docs/ckeditor5/latest/getting-started/index.html).
+Navigate to the upload server directory:
+
+```sh
+cd /ckeditor-upload-server
+```
+
+Start the server:
+
+```sh
+node server.js
+```
